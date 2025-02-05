@@ -1,4 +1,4 @@
-Steps followed while doing this task
+Required Installation Steps followed while doing this task
 1. Create one ec2 instance must allow port 22(SSH), 25 (SMTP)
 2. Login to instance install necessary packages 
     * sudo apt update
