@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  yelb-ui:
+    image: mreferre/yelb-ui:0.5
+    ports:
+      - "8080:80"
+    depends_on:
+      - yelb-appserver
+    networks:
+      - yelb-network
+  yelb-appserver:
+    image: mreferre/yelb-appserver:0.7
+    ports:
+      - "4567:4567"
+    depends_on:
+      - yelb-redis
+    networks:
+      - yelb-network
+  
+  yelb-redis:
+    image: redis:4.0.2
+    ports:
+      - "6379:6379"
+    networks:
+      - yelb-network
+  yelb-postgres:
+    image: mreferre/yelb-db:0.6
+    ports:
+      - "5432:5432"
+    networks:
+      - yelb-network
+    
+networks:
+  yelb-network:
+    driver: bridge
