@@ -23,8 +23,6 @@ kubectl get roles -n development
 kubectl get rolesbindings -n development
 kubectl api-resources | grep role
 kubectl get rolebindings
-kubectl get rolebindings -n developemen
-kubectl get rolebindings -n developemeny
 kubectl get rolebindings -n developement
 kubectl get rolebindings -n development
 kubectl get cm -n kube-system

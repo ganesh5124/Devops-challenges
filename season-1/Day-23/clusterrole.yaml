@@ -1,0 +1,37 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole 
+metadata:
+  name: deployment-viewer 
+rules:
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding 
+metadata:
+  name: deployment-viewer-binding 
+subjects:
+- kind: User 
+  name: cred 
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole 
+  name: deployment-viewer
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  namespace: cred
+  labels:
+    app: nginx-pod
+spec:
+  serviceAccountName: app-sa
+  containers:
+  - name: nginx-pod
+    image: bitnami/kubectl
+    command: ["sleep", "3600"]
+

@@ -1,0 +1,32 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+# configmaps "aws-auth" was not valid:
+# * <nil>: Invalid value: "The edited file failed validation": yaml: line 13: did not find expected key
+#
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::300079938968:role/eksctl-cred-nodegroup-ng-f6fd6783-NodeInstanceRole-zTCGcRcE2fJG
+      username: system:node:{{EC2PrivateDNSName}}
+    - rolearn: arn:aws:iam::300079938968:role/ec2assumerole
+      username: ec2assumerole
+      groups:
+      	- system:nodes
+  mapUsers: |
+    - userarn: arn:aws:iam::300079938968:user/cred 
+      username: cred
+      groups:
+        - system:masters
+  
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2025-05-04T13:55:53Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "1308"
+  uid: c8f3b20f-3a63-4c3e-a22e-0ee5f458670e
